@@ -11,13 +11,14 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+import sys
 import configparser
 from pathlib import Path
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
-if not os.path.isfile(os.path.join(BASE_DIR, 'config.ini')):
+if len(sys.argv) == 2 and sys.argv[1] != 'collectstatic' and not os.path.isfile(os.path.join(BASE_DIR, 'config.ini')):
     print("Please create config.ini first")
     exit(1)
 
@@ -66,3 +67,4 @@ ROOT_URLCONF = 'management.urls'
 LOGIN_URL = '/login'
 LOGIN_REDIRECT_URL = '/'
 DJANGO_TITLE = CONFIG.get('DJANGO', 'TITLE', fallback='DJANGO')
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
