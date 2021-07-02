@@ -23,7 +23,13 @@ if len(sys.argv) == 2 and sys.argv[1] != 'collectstatic' and not os.path.isfile(
     exit(1)
 
 CONFIG = configparser.RawConfigParser()
-CONFIG.read(os.path.join(BASE_DIR, 'config.ini'))
+if len(sys.argv) == 2 and sys.argv[1] == 'collectstatic':
+    CONFIG['DJANGO'] = {"SECRET_KEY": "helloworld", "debug": False}
+elif not os.path.isfile(os.path.join(BASE_DIR, 'config.ini')):
+    print("Please create config.ini first")
+    exit(1)
+else:
+    CONFIG.read(os.path.join(BASE_DIR, 'config.ini'))
 
 if 'DJANGO' not in CONFIG:
     exit(1)

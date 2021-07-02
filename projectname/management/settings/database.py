@@ -3,7 +3,7 @@ from .base import CONFIG
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-DATABASE_DEFAULT = CONFIG.get('DJANGO', 'DATABASE_DEFAULT')
+DATABASE_DEFAULT = CONFIG.get('DJANGO', 'DATABASE_DEFAULT', fallback='sqlite')
 DATABASES = {
     'default': {
         'ENGINE': CONFIG.get('DATABASE:' + DATABASE_DEFAULT, 'ENGINE', fallback='django.db.backends.sqlite3'),
