@@ -18,10 +18,6 @@ from pathlib import Path
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
-if len(sys.argv) == 2 and sys.argv[1] != 'collectstatic' and not os.path.isfile(os.path.join(BASE_DIR, 'config.ini')):
-    print("Please create config.ini first")
-    exit(1)
-
 CONFIG = configparser.RawConfigParser()
 if len(sys.argv) == 2 and sys.argv[1] == 'collectstatic':
     CONFIG['DJANGO'] = {"SECRET_KEY": "helloworld", "debug": False}
